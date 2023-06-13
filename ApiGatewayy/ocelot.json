@@ -60,6 +60,9 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role" : "Administrator"
       }
     },
 
@@ -90,7 +93,14 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Order"
+      "DownstreamPathTemplate": "/api/Order",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "60s",
+        "PeriodTimespan": 60,
+        "Limit": 1
+      }
     },
 
     {
@@ -108,6 +118,10 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:800"
+    "BaseUrl": "http://localhost:8001",
+    "RateLimitOptions": {
+      "QuotaExceededMessage": "Request Not Allowed",
+      "HttpStatusCode": 909
+    } 
   }
 }
